@@ -1,0 +1,12 @@
+ [
+     {
+         "scope": "domain:site1.edu",
+         "patterns": [
+             "AllowPath /college1/",
+             "AllowPath /college2/",
+             "AllowPath /college3/",
+              "DenyPath .+"
+         ]
+     }
+
+ ]
