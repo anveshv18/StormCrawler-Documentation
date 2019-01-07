@@ -10,6 +10,8 @@ Main configuration includes
 * pom.xml
 * crawltopology.java
 
+![FileStructure](filestructure.png)
+
 ### crawler-conf.yaml
 ```
 config: 
