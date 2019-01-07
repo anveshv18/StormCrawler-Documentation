@@ -518,6 +518,18 @@ config:
 	</dependencies>
 </project>
 ```
+### seeds.txt
+* Filter the Main sites by college. In this Approach you need to configure fast.urlfilter.json and urlfilter.json under /src/main/resources 
+```
+https://www.site1.edu/college1/	seed=college1
+https://www.site1.edu/college2/	seed=college2
+https://www.site1.edu/college3/	seed=college3
+```
+* For single website crawling without any filter just mention the url of the website
+```
+https://www.site1.edu/
+```
+
 ### crawltoplology.java
 ```
 package com.test.edu;
