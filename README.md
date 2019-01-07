@@ -10,6 +10,8 @@ Main configuration includes
 * pom.xml
 * seeds.txt
 * crawltopology.java
+* fast.urlfilter.json
+* urlfilter.json
 
 ![FileStructure](filestructure.png)
 
@@ -520,7 +522,7 @@ config:
 </project>
 ```
 ### seeds.txt
-* Filter the Main sites by college. In this Approach you need to configure fast.urlfilter.json and urlfilter.json under /src/main/resources 
+* The below approach h is used to crawl the specific pages under main domain. For this, need to configure fast.urlfilter.json and urlfilter.json under /src/main/resources 
 ```
 https://www.site1.edu/college1/	seed=college1
 https://www.site1.edu/college2/	seed=college2
@@ -629,4 +631,98 @@ public class CrawlTopology extends ConfigurableTopology {
         return submit("crawl", conf, builder);
     }
 }
+```
+### fast.urlfilter.json
+<!-- This filter configuration is used to enable the crawler to crawl only the specific pages added in seeds.txt -->
+```
+ [
+     {
+         "scope": "domain:site1.edu",
+         "patterns": [
+             "AllowPath /college1/",
+             "AllowPath /college2/",
+             "AllowPath /college3/",
+              "DenyPath .+"
+         ]
+     }
+
+ ]
+```
+
+### urlfilter.json
+
+```
+{
+  "com.digitalpebble.stormcrawler.filtering.URLFilters": [
+    {
+      "class": "com.digitalpebble.stormcrawler.filtering.basic.BasicURLFilter",
+      "name": "BasicURLFilter",
+      "params": {
+        "maxPathRepetition": 3,
+        "maxLength": 1024
+      }
+    },
+    {
+      "class": "com.digitalpebble.stormcrawler.filtering.depth.MaxDepthFilter",
+      "name": "MaxDepthFilter",
+      "params": {
+        "maxDepth": -1
+      }
+    },
+    {
+      "class": "com.digitalpebble.stormcrawler.filtering.basic.BasicURLNormalizer",
+      "name": "BasicURLNormalizer",
+      "params": {
+        "removeAnchorPart": true,
+        "unmangleQueryString": true,
+        "checkValidURI": true,
+        "removeHashes": false
+      }
+    },
+    {
+      "class": "com.digitalpebble.stormcrawler.filtering.host.HostURLFilter",
+      "name": "HostURLFilter",
+      "params": {
+        "ignoreOutsideHost": true,
+        "ignoreOutsideDomain": true
+      }
+    },
+    {
+      "class": "com.digitalpebble.stormcrawler.filtering.regex.RegexURLNormalizer",
+      "name": "RegexURLNormalizer",
+      "params": {
+        "regexNormalizerFile": "default-regex-normalizers.xml"
+      }
+    },
+  
+  <!-- Enable the fast.urlfilter whenever you need to perform domain specific crawling -->
+  
+    {
+      "class": "com.digitalpebble.stormcrawler.filtering.regex.FastURLFilter",
+      "name": "FastURLFilter",
+      "params": {
+        "file": "fast.urlfilter.json"
+      }
+    },
+     {
+      "class": "com.digitalpebble.stormcrawler.filtering.regex.RegexURLFilter",
+      "name": "RegexURLFilter",
+      "params": {
+        "regexFilterFile": "default-regex-filters.txt"
+      }
+    },
+    {
+      "class": "com.digitalpebble.stormcrawler.filtering.basic.SelfURLFilter",
+      "name": "SelfURLFilter"
+    },
+   {
+      "class": "com.digitalpebble.stormcrawler.filtering.metadata.MetadataFilter",
+      "name": "MetadataFilter",
+      "params": {
+        "isSitemap": "false"
+      }
+    }
+  ]
+}
+
 ```
