@@ -8,6 +8,7 @@ Main configuration includes
 * es-injector.flux
 * es-conf.yaml
 * pom.xml
+* seeds.txt
 * crawltopology.java
 
 ![FileStructure](filestructure.png)
