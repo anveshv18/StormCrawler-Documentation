@@ -561,9 +561,6 @@ import com.digitalpebble.stormcrawler.tika.ParserBolt;
 
 import com.digitalpebble.stormcrawler.util.ConfUtils;
 
-/**
- * Dummy topology to play with the spouts and bolts on ElasticSearch
- */
 public class CrawlTopology extends ConfigurableTopology {
 
     public static void main(String[] args) throws Exception {
