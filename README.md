@@ -112,6 +112,8 @@ config:
      - class: "org.apache.storm.metric.LoggingMetricsConsumer"
        parallelism.hint: 1
 ```
+ By Default for every 19 hours crawler rechecks the page. You can increase or decrease this interval limit by changing **fetchInterval.default** value in *crawler.conf.yaml* . 
+
 ### es-crawler.flux
 ```
 name: "Crawler"
