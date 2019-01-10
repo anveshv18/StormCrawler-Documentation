@@ -731,7 +731,7 @@ public class CrawlTopology extends ConfigurableTopology {
 
 - For Fast Crawling **es.status.max.urls.per.bucket** increase to a larger value e.g. 10 and drop **spout.min.delay.queries** e.g. 1000 msec to the same value as **refresh_interval** in status-index e.g. 1 sec. Make sure that **spout.min.delay.queries** should match with the elastic search status index refresh intervel.  
 
-Eg.
+E.g. 
 ```
 Status-Index	   Index Refresh Interval	   spout.min.delay.queries
 www-colleges		0.5s				500ms
