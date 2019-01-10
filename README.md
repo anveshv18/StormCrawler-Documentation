@@ -725,3 +725,13 @@ public class CrawlTopology extends ConfigurableTopology {
 }
 
 ```
+
+
+### Tip:
+
+- For Fast Crawling **es.status.max.urls.per.bucket** increase to a larger value e.g. 10 and drop **spout.min.delay.queries** e.g. 1000 msec to the same value as **refresh_interval** in status-index e.g. 1 sec. 
+
+
+
+
+
