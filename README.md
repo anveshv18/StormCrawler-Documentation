@@ -631,6 +631,56 @@ public class CrawlTopology extends ConfigurableTopology {
     }
 }
 ```
+### parserfilter.json
+```
+{
+  "com.digitalpebble.stormcrawler.parse.ParseFilters": [
+    {
+      "class": "com.digitalpebble.stormcrawler.parse.filter.XPathFilter",
+      "name": "XPathFilter",
+      "params": {
+        "canonical": "//*[@rel=\"canonical\"]/@href",
+        "parse.description": [
+            "//*[@name=\"description\"]/@content",
+            "//*[@name=\"Description\"]/@content"
+         ],
+        "parse.title": [
+            "//TITLE",
+            "//META[@name=\"title\"]/@content"
+         ],
+         "parse.keywords": "//META[@name=\"keywords\"]/@content"
+      }
+    },
+    {
+      "class": "com.digitalpebble.stormcrawler.parse.filter.ContentFilter",
+      "name": "ContentFilter",
+      "params": {
+        "pattern":"//MAIN[@role=\"main\"]",
+        "pattern2":"//DIV[@id=\"content--news\"]",
+        "pattern3":"//DIV[@class=\"field field--name-field-content field--type-entity-reference-revisions field--label-hidden field__items\"]",
+        "pattern4":"//ARTICLE"
+
+       }
+    },
+    {
+      "class": "com.digitalpebble.stormcrawler.parse.filter.DomainParseFilter",
+      "name": "DomainParseFilter",
+      "params": {
+        "key": "domain",
+        "byHost": false
+       }
+    },
+    {
+      "class": "com.digitalpebble.stormcrawler.parse.filter.CommaSeparatedToMultivaluedMetadata",
+      "name": "CommaSeparatedToMultivaluedMetadata",
+      "params": {
+        "keys": ["parse.keywords"]
+       }
+    }
+  ]
+}
+
+```
 ### fast.urlfilter.json
 <!-- This filter configuration is used to enable the crawler to crawl only the specific pages added in seeds.txt -->
 ```
