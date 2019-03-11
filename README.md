@@ -776,7 +776,7 @@ public class CrawlTopology extends ConfigurableTopology {
 
 ```
 ### Parsing Custom Meta Tags
-To Crawl custom meta tags, need to add additional configuration on crawler-conf.yaml, parsefilters.json and es-conf.yaml
+To Crawl custom meta tags, need to add additional configuration to crawler-conf.yaml, parsefilters.json and es-conf.yaml
 
 - Crawler-conf.yaml
 
