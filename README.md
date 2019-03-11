@@ -819,7 +819,7 @@ To Crawl custom meta tags, need to add additional configuration to crawler-conf.
  
  Inorder to store custom meta infomartion create an another field on the index configuration. 
  ```
- "generator": {
+ "custom": {
                "type": "keyword",
                "index": "true",
                "store": true
