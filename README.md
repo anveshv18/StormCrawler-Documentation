@@ -775,7 +775,56 @@ public class CrawlTopology extends ConfigurableTopology {
 }
 
 ```
+### Parsing Custom Meta Tags
+To Crawl custom meta tags, need to add additional configuration on crawler-conf.yaml, parsefilters.json and es-conf.yaml
 
+- Crawler-conf.yaml
+
+  Add an additional mapping under indexer.md.mapping
+  ```  
+  indexer.md.mapping:
+  - parse.title=title
+  - parse.keywords=keywords
+  - parse.description=description
+  - parse.custom=custom                     <!--Custom Meta Tag-->
+  - domain=domain
+  ```
+ 
+ - parserfilters.json
+ 
+ Create one more parser that holds the new meta information
+ ```
+ {
+  "com.digitalpebble.stormcrawler.parse.ParseFilters": [
+    {
+      "class": "com.digitalpebble.stormcrawler.parse.filter.XPathFilter",
+      "name": "XPathFilter",
+      "params": {
+        "canonical": "//*[@rel=\"canonical\"]/@href",
+        "parse.description": [
+            "//*[@name=\"description\"]/@content",
+            "//*[@name=\"Description\"]/@content"
+         ],
+        "parse.title": [
+            "//TITLE",
+            "//META[@name=\"title\"]/@content"
+         ],
+         "parse.keywords": "//META[@name=\"keywords\"]/@content",		 
+         "parse.custom":  "//META[@name=\"generator\"]/@content"     <!--Defining Custom Meta Tag-->
+      }
+    },
+ ```
+ 
+ - es-conf.yaml
+ 
+ Inorder to store custom meta infomartion create an another field on the index configuration. 
+ ```
+ "generator": {
+               "type": "keyword",
+               "index": "true",
+               "store": true
+        }
+ ```
 
 ### Tip:
 
