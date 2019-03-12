@@ -825,6 +825,22 @@ To Crawl custom meta tags, need to add additional configuration to crawler-conf.
                "store": true
         }
  ```
+ 
+ ### XPATH Configuration
+ 
+ ```
+   textextractor.include.pattern:
+   - MAIN[role="main"]
+   - DIV[id="block-rit-bootstrap-subtheme-content"] 
+   - DIV[class="block block-system block-system-main-block"]
+   - DIV[class="field field--name-field-content field--type-entity-reference-revisions field--label-hidden field__items"]
+   - ARTICLE[role="article"]
+
+  textextractor.exclude.tags:
+   - NAV
+   - STYLE
+   - SCRIPT
+ ```
 
 ### Tip:
 
